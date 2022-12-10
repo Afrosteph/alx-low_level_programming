@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <unistd>
-
 /**
- * main - Entry point
- * Return: Always 1
+ * main - prins exactly and that place of art is useful
+ *
+ * Return: Always 1 (success)
  */
 
 int main (void)
