@@ -1,10 +1,8 @@
  #include "main.h"
 
-#include "holberton.h"
-
 /**
   * _strlen - Returns the length of a string
-  * @s: String to count
+  * @s: String
   *
   * Return: String length
   */
