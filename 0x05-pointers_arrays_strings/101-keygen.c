@@ -1,7 +1,6 @@
 #include "main.h"
 #include "stdlib.h"
 #include "time.h"
-
 /**
  * main - Generates random valid for the program  101-crackme
  * Return: Always 0
