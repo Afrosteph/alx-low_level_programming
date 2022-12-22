@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * infinite_add - adds two numbers.
@@ -45,3 +44,4 @@ int i, j, k, l, m, n;
 	}
 	return (r);
 }
+Foo
