@@ -5,12 +5,10 @@ int main(void)
 int n;
 int a[5];
 int *p;
-
 a[2] = 1024;
 p = &n;
 /*
- * main - Add one line to this code that the program prints
-* write your line of code here...
+*main - write your line of code here...
 * Remember:
 * - you are not allowed to use a
 * - you are not allowed to modify p
