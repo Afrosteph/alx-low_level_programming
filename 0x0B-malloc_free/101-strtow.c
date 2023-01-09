@@ -16,7 +16,7 @@ int number(char *str)
 	{
 		if (*str == ' ')
 			str++;
-		else
+		els
 		{
 			for (; str[a] != ' ' && str[a] != '\0'; a++)
 				str++;
@@ -24,17 +24,6 @@ int number(char *str)
 		}
 	}
 	return (num);
-}
-/**
- * free_everything - frees the memory
- * @string: pointer values being passed for freeing
- * @i: counter
- */
-void free_everything(char **string, int i)
-{
-	for (; i > 0;)
-		free(string[--i]);
-	free(string);
 }
 
 /**
