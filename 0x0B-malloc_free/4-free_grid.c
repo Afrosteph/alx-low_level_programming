@@ -6,7 +6,8 @@
  * @grid: target memory to free
  * @height: size of array.
  *
- */  
+ */
+
 void free_grid(int **grid, int height)
 {
 	int i;
