@@ -1,91 +1,165 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * _puts - prints a string, followed by a new line,
- * @str: pointer to the string to print
- * Return: void
-*/
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
+ */
+int _strlen(char *s)
+{
+	char *p = s;
 
+	while (*s)
+		s++;
+	return (s - p);
+}
 
+/**
+ * _memset - fills memory with a constant byte.
+ * @s: the memory area to be filled
+ * @b: the constant byte
+ * @n: number of bytes to fill with char b
+ * Return: a pointer to the memory area s.
+ */
+
+char *_memset(char *s, char b, unsigned int n)
+{
+	char *p = s;
+
+	for (; n; n--)
+		*p++ = b;
+
+	return (s);
+}
+
+/**
+ * _calloc - allocates memory for an array
+ * @nmemb: number of elements
+ * @size: of each element
+ * Return: void *
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	void *ptr;
+
+	if (size == 0 || nmemb == 0)
+		return (NULL);
+
+	ptr = malloc(nmemb * size);
+	if (ptr == NULL)
+		return (NULL);
+
+	_memset(ptr, 0, size * nmemb);
+
+	return (ptr);
+}
+
+/**
+ *_puts - prints a string, followed by a new line, to stdout.
+ * @str: the input string
+ * Return: nothing to return.
+ */
 void _puts(char *str)
 {
-int i = 0;
-while (str[i])
-{
-	_putchar(str[i]);
-	i++;
-}
-
+	while (*str != 0)
+	{
+		_putchar(*str);
+		str++;
+	}
+	_putchar('\n');
 }
 
 /**
- * _atoi - convert a string to an integer.
- * @s: char type string
- * Return: integer converted
+ * strNumbers - determines if string has only numbers
+ * @str: input string
+ * Return: 0 if false, 1 if true
+ */
+int strNumbers(char *str)
+{
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+/**
+ * multiply - multiplies two numbers (in string), and prints the result.
+ * @n1: first number
+ * @n2: second number
+ * Return: void
  */
 
-int _atoi(const char *s)
+void multiply(char *n1, char *n2)
 {
-	int sign = 1;
-	unsigned long int resp = 0, firstNum, i;
+	int idx, n1n, n2n, res, tmp, total;
+	int n1l = _strlen(n1);
+	int n2l = _strlen(n2);
 
-	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
+	int *ptr;
+
+	tmp = n2l;
+	total = n1l + n2l;
+	ptr = _calloc(total, sizeof(int));
+	for (n1l--; n1l >= 0; n1l--)
 	{
-		if (s[firstNum] == '-')
+		n1n = n1[n1l] - '0';
+		res = 0;
+		n2l = tmp;
+		for (n2l--; n2l >= 0; n2l--)
 		{
-			sign *= -1;
+			n2n = n2[n2l] - '0';
+			res += ptr[n1l + n2l + 1] + (n1n * n2n);
+			ptr[n1l + n2l + 1] = res % 10;
+			res /= 10;
+		}
+		if (res)
+		{
+			ptr[n1l + n2l + 1] = res % 10;
 		}
 	}
-
-	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
+	res = 0;
+	for (idx = 0; idx < total; idx++)
 	{
-		resp *= 10;
-		resp += (s[i] - 48);
+		if (ptr[idx] == 0 && res == 1)
+			_putchar(ptr[idx] + '0');
+		else if (ptr[idx] > 0)
+		{
+			_putchar(ptr[idx] + '0');
+			res = 1;
+		}
 	}
-
-	return (sign * resp);
+	_putchar('\n');
+	free(ptr);
 }
 
 /**
- * print_int - prints an integer.
- * @n: int
+ * main - adds positive numbers.
+ * @argc: the number of arguments
+ * @argv: the arguments
+ *
  * Return: 0
  */
 
-void print_int(unsigned long int n)
+int main(int argc, char **argv)
 {
+	char *nb1 = argv[1];
+	char *nb2 = argv[2];
 
-unsigned  long int divisor = 1, i, resp;
-
-for (i = 0; n / divisor > 9; i++, divisor *= 10)
-;
-
-for (; divisor >= 1; n %= divisor, divisor /= 10)
-{
-	resp = n / divisor;
-	_putchar('0' + resp);
-}
-
-}
-
-/**
- * main - print the result of the multiplication, followed by a new line
- * @argc: int
- * @argv: list
- * Return: 0
- */
-
-int main(int argc, char const *argv[])
-{
-(void)argc;
-
-if (argc != 3)
-{
-	_puts("Error ");
-	exit(98);
-}
-print_int(_atoi(argv[1]) * _atoi(argv[2]));
-_putchar('\n');
-
-return (0);
+	if (argc != 3 || !strNumbers(nb1) || !strNumbers(nb2))
+	{
+		_puts("Error");
+		exit(98);
+	}
+	if (*nb1 == '0' || *nb2 == '0')
+		_puts("0");
+	else
+	{
+		multiply(nb1, nb2);
+	}
+	return (0);
 }
