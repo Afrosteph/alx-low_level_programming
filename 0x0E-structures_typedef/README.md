@@ -1,1 +1,1 @@
-This is my read me on 0x0E. C - Structures, typedef 
+This is read me 0x0E. C - Structures, typedef
